@@ -34,7 +34,7 @@ body {
 
 .myDate {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
-    font-size: 1.8rem; 
+    font-size: 1.7rem; 
     margin-left: 10px;      
     line-height: 1;
 }
@@ -121,6 +121,7 @@ body {
     margin-left: 1em;
     border: 1px solid #ffffff;
 }
+
 
 
 
