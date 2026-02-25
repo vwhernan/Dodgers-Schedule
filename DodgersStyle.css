@@ -17,25 +17,29 @@ body {
 
 /*============== HEADER ================*/
 .DodgersHeader {
-    font-family: 'Playball', cursive !important; 
     background: #005A9C; 
-    color: white; 
+    display: flex;
+    align-items: center;     
+    justify-content: center; 
     padding: 10px; 
+ 
+}
+
+.DodgersHeader p {
+    font-family: 'Playball', cursive !important; 
+    color: white; 
     font-weight: 400; 
     font-size: 1.8rem; 
     text-transform: none; /* REQUIRED: Script fonts break if they are all caps */
     letter-spacing: 1px; 
     text-align: center;
-
-    display: flex;
-    align-items: center;     
-    justify-content: center; 
+    margin-bottom: 0;
 }
-
 .myDate {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
     font-size: 1.7rem; 
-    margin-left: 10px;      
+    margin-left: 10px;
+    margin-bottom: 4px;      
     line-height: 1;
 }
 
