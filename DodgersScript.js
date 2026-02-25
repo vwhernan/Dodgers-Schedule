@@ -56,7 +56,7 @@ function renderGames(gamesToDisplay) {
             <span style="flex: 1; font-weight: bold;">${gameDate}</span>
             <span style="flex: 2; text-align: left;">${isHome ? 'vs' : '@'} ${opponent}</span>
             <span style="flex: 1; text-align: center; color: #005A9C; font-weight: bold;">${scoreDisplay}</span>
-            <span style="flex: 1; text-align: right; font-size: 0.85em; opacity: 0.7;">${gameTime}</span>
+            <span style="flex: 1; text-align: center; font-size: 0.85em; opacity: 0.7;">${gameTime}</span>
         `;
         list.appendChild(li);
     });
@@ -76,5 +76,6 @@ document.getElementById('month-filter').addEventListener('change', (e) => {
         renderGames(filtered);
     }
 });
+
 
 fetchDodgersSchedule();
