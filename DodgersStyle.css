@@ -66,6 +66,24 @@ body {
     border: none;
     padding: 10px;
 }
+
+.ListHeaderUl{
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 2px;
+    
+}
+
+.ListHeaderli{
+    font-weight: bold; 
+    background-color: #005A9C; 
+    border-radius: 0;
+}
+
+.ListHeaderli span {
+    flex: 1;          /* Each span takes up equal space */
+    text-align: center; /* Centers the text within that space */
+}
 /*==============Widget Two CSS================*/
 
 .widgetTwo{
@@ -73,4 +91,5 @@ body {
     margin-left: 1em;
     border: 1px solid #ffffff;
 }
+
 
