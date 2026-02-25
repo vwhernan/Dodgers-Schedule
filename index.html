@@ -34,9 +34,20 @@
                         </select>
                     </div>
 
-                    <ul id="game-list" class="DodgersList">
-                        <li class="DodgerListItem">Loading games...</li>
-                    </ul>
+                    <div class="ListDiv">
+                      <ul class="ListHeaderUl list-group p-0 m-0">
+                        <li class="ListHeaderli list-group-item d-flex justify-content-between align-items-center">
+                          <span style="flex: 1; text-align: left;">Date</span>
+                          <span style="flex: 2; text-align: center;">Game</span>
+                          <span style="flex: 1; text-align: center;">Score</span>
+                          <span style="flex: 1; text-align: right;">Time</span>
+                        </li>
+                      </ul>
+          
+                      <ul id="game-list" class="DodgersList list-group p-0 m-0">
+                        <li class="DodgerListItem list-group-item">Loading games...</li>
+                      </ul>
+                    </div>
                 </div>
             </div>
         </div> 
@@ -46,3 +57,4 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
