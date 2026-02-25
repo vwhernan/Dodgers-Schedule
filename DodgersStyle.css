@@ -74,9 +74,9 @@ body {
     
 }
 
-.ListHeaderli{
+.ListHeaderli {
     font-weight: bold; 
-    background-color: #005A9C !important; 
+    --bs-list-group-bg: #005A9C; 
     color: white !important; 
     border-radius: 0;
 }
@@ -92,6 +92,7 @@ body {
     margin-left: 1em;
     border: 1px solid #ffffff;
 }
+
 
 
 
