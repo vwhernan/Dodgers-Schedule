@@ -57,7 +57,7 @@ function renderGames(gamesToDisplay) {
             const awaySpan = `<span style="color: ${!isHome ? '#005A9C' : '#EF3E42'};">${awayScore}</span>`;
             
             // Format: Away - Home
-            scoreDisplay = `${awaySpan} - ${homeSpan}`;
+            scoreDisplay = `${homeSpan} - ${awaySpan}`;
         }
 
         const li = document.createElement('li');
@@ -88,3 +88,4 @@ document.getElementById('month-filter').addEventListener('change', (e) => {
 
 // Initialize
 fetchDodgersSchedule();
+
