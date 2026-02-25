@@ -26,14 +26,17 @@ body {
     text-transform: none; /* REQUIRED: Script fonts break if they are all caps */
     letter-spacing: 1px; 
     text-align: center;
+
+    display: flex;
+    align-items: center;     
+    justify-content: center; 
 }
 
 .myDate {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
     font-size: 1.8rem; 
-    vertical-align: middle;
-    display: inline-block;
-    margin-left: 5px;
+    margin-left: 10px;      
+    line-height: 1;
 }
 
 /*============== THE LIST  ================*/
@@ -118,6 +121,7 @@ body {
     margin-left: 1em;
     border: 1px solid #ffffff;
 }
+
 
 
 
