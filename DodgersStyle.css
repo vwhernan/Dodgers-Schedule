@@ -24,7 +24,7 @@ body {
     font-weight: 400; 
     font-size: 1.8rem; 
     text-transform: none; /* REQUIRED: Script fonts break if they are all caps */
-    letter-spacing: 0px; 
+    letter-spacing: 1px; 
     text-align: center;
 }
 
@@ -109,6 +109,7 @@ body {
     margin-left: 1em;
     border: 1px solid #ffffff;
 }
+
 
 
 
