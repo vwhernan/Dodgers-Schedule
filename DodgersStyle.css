@@ -1,0 +1,76 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevent horizontal scrolling on mobile */
+}
+
+/*==============DODGER CSS================*/
+.DodgersFont-Border {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    width: 100%;           /* Fill the column width */
+    max-width: 600px;      /* don't get too big on Desktop */
+    margin: 0 auto;        /* Center it */
+    border: 1px solid #444;
+    border-radius: 8px;    /* Rounded corners*/
+    overflow: hidden;      /* Keeps the list from breaking the rounded corners */
+}
+
+/*============== HEADER ================*/
+.DodgersHeader {
+    background: #005A9C; 
+    color: white; 
+    padding: 15px; 
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/*============== THE LIST  ================*/
+.DodgersList {
+    /* calc(100vh - 200px) ensures the list takes up most of the screen 
+       minus the space for the header and nav */
+    height: 70vh; 
+    overflow-y: auto;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: #A5ACAF;
+}
+
+/* Mobile Friendly Scrollbar */
+.DodgersList::-webkit-scrollbar {
+    width: 4px;
+}
+.DodgersList::-webkit-scrollbar-thumb {
+    background: #005A9C;
+    border-radius: 10px;
+}
+
+/*============== LIST ITEMS ================*/
+#game-list .DodgerListItem {
+    padding: 18px 15px !important; /* Larger touch targets for fingers */
+    background-color: #ffffff !important; /* Clean white background */
+    color: #333 !important;
+    font-size: 1rem;
+    border-bottom: 1px solid #eee !important;
+    display: flex;
+    align-items: center;
+}
+
+/* Filter Dropdown Styling */
+.DodgersSearch {
+    background-color: #f8f9fa;
+    color: #333;
+    font-weight: bold;
+    border: none;
+    padding: 10px;
+}
+/*==============Widget Two CSS================*/
+
+.widgetTwo{
+    margin-top: 1em;
+    margin-left: 1em;
+    border: 1px solid #ffffff;
+}
+
