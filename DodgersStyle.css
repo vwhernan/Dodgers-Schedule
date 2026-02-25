@@ -76,7 +76,8 @@ body {
 
 .ListHeaderli{
     font-weight: bold; 
-    background-color: #005A9C; 
+    background-color: #005A9C !important; 
+    color: white !important; 
     border-radius: 0;
 }
 
@@ -91,5 +92,6 @@ body {
     margin-left: 1em;
     border: 1px solid #ffffff;
 }
+
 
 
