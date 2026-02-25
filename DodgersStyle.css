@@ -75,10 +75,16 @@ body {
 }
 
 .ListHeaderli {
-    font-weight: bold; 
-    --bs-list-group-bg: #005A9C; 
-    color: white !important; 
-    border-radius: 0;
+    /* Target the specific Bootstrap variables */
+    --bs-list-group-bg: #005A9C !important;
+    --bs-list-group-color: #ffffff !important;
+    --bs-list-group-border-color: #004a80 !important;
+    
+    /* Fallback for older browsers or specific overrides */
+    background-color: #005A9C !important; 
+    color: white !important;
+    font-weight: bold;
+    border-radius: 0 !important;
 }
 
 .ListHeaderli span {
@@ -92,6 +98,7 @@ body {
     margin-left: 1em;
     border: 1px solid #ffffff;
 }
+
 
 
 
