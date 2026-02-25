@@ -67,6 +67,15 @@ body {
     padding: 10px;
 }
 
+
+
+[data-bs-theme="dark"] .ListHeaderUl .ListHeaderli {
+    background-color: #005A9C !important;
+    --bs-list-group-bg: #005A9C !important;
+    color: white !important;
+    --bs-list-group-color: white !important;
+    border-color: #004a80 !important;
+    font-weight: bold;
 .ListHeaderUl{
     list-style-type: none;
     padding: 0;
@@ -98,6 +107,7 @@ body {
     margin-left: 1em;
     border: 1px solid #ffffff;
 }
+
 
 
 
