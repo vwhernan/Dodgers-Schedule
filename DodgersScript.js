@@ -2,11 +2,10 @@ let allGames = []; // Global variable to store fetched games
 
 async function fetchDodgersSchedule() {
     const now = new Date();
-    const today = "2026-01-01";
+    const today = "2026-01-01"; 
     const yearEnd = "2026-12-31";
     const url = `https://statsapi.mlb.com/api/v1/schedule?sportId=1&teamId=119&startDate=${today}&endDate=${yearEnd}`;
     
-    // Update Header Date
     const headerElement = document.getElementById('current-date');
     if (headerElement) headerElement.innerText = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 
@@ -20,11 +19,9 @@ async function fetchDodgersSchedule() {
                 date.games.forEach(game => allGames.push(game));
             });
         }
-
         renderGames(allGames); 
     } catch (error) {
-        console.error("Error fetching schedule:", error);
-        document.getElementById('game-list').innerHTML = '<li class="DodgerListItem">Error loading schedule.</li>';
+        console.error("Error:", error);
     }
 }
 
@@ -33,7 +30,7 @@ function renderGames(gamesToDisplay) {
     list.innerHTML = '';
 
     if (gamesToDisplay.length === 0) {
-        list.innerHTML = '<li class="DodgerListItem">No games found.</li>';
+        list.innerHTML = '<li class="DodgerListItem">No games found for this month.</li>';
         return;
     }
 
@@ -45,18 +42,19 @@ function renderGames(gamesToDisplay) {
         const isHome = game.teams.home.team.id === 119;
         const opponent = isHome ? game.teams.away.team.name : game.teams.home.team.name;
         
-        // Score Logic
+        // This is the color for the "Game" column text
+        const gameTextColor = isHome ? '#2b82c0' : '#000000';
+
         let scoreDisplay = "TBD";
-        
         if (game.status.abstractGameState !== "Preview") {
             const homeScore = game.teams.home.score ?? 0;
             const awayScore = game.teams.away.score ?? 0;
 
-            // Dodgers color: #005A9C | Opponent color: #EF3E42
+            // Score numbers still follow team colors
             const homeSpan = `<span style="color: ${isHome ? '#005A9C' : '#EF3E42'};">${homeScore}</span>`;
             const awaySpan = `<span style="color: ${!isHome ? '#005A9C' : '#EF3E42'};">${awayScore}</span>`;
             
-            // Format: Away - Home
+            // Home score always first
             scoreDisplay = `${homeSpan} - ${awaySpan}`;
         }
 
@@ -64,7 +62,7 @@ function renderGames(gamesToDisplay) {
         li.className = "DodgerListItem list-group-item d-flex justify-content-between align-items-center";
         li.innerHTML = `
             <span style="flex: 1; font-weight: bold;">${gameDate}</span>
-            <span style="flex: 2; text-align: left;">${isHome ? 'vs' : '@'} ${opponent}</span>
+            <span style="flex: 2; text-align: left; color: ${gameTextColor}; font-weight: bold;">${isHome ? 'Home vs' : 'Away @'} ${opponent}</span>
             <span style="flex: 1; text-align: center; font-weight: bold;">${scoreDisplay}</span>
             <span style="flex: 1; text-align: center; font-size: 0.85em;">${gameTime}</span>
         `;
@@ -72,7 +70,7 @@ function renderGames(gamesToDisplay) {
     });
 }
 
-// Listen for dropdown changes
+// Event Listener for Filtering
 document.getElementById('month-filter').addEventListener('change', (e) => {
     const selectedMonth = e.target.value;
     if (selectedMonth === "all") {
@@ -86,6 +84,4 @@ document.getElementById('month-filter').addEventListener('change', (e) => {
     }
 });
 
-// Initialize
 fetchDodgersSchedule();
-
