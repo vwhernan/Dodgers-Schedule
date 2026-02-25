@@ -2,7 +2,7 @@ let allGames = []; // Global variable to store fetched games
 
 async function fetchDodgersSchedule() {
     const now = new Date();
-    const today = "2026-01-01";//now.toISOString().split('T')[0];
+    const today = "2026-01-01";
     const yearEnd = "2026-12-31";
     const url = `https://statsapi.mlb.com/api/v1/schedule?sportId=1&teamId=119&startDate=${today}&endDate=${yearEnd}`;
     
@@ -14,7 +14,6 @@ async function fetchDodgersSchedule() {
         const response = await fetch(url);
         const data = await response.json();
         
-        // Flatten the API data into a single array of game objects
         allGames = [];
         if (data.dates) {
             data.dates.forEach(date => {
@@ -22,9 +21,10 @@ async function fetchDodgersSchedule() {
             });
         }
 
-        renderGames(allGames); // Initial render
+        renderGames(allGames); 
     } catch (error) {
-        console.error("Error:", error);
+        console.error("Error fetching schedule:", error);
+        document.getElementById('game-list').innerHTML = '<li class="DodgerListItem">Error loading schedule.</li>';
     }
 }
 
@@ -33,7 +33,7 @@ function renderGames(gamesToDisplay) {
     list.innerHTML = '';
 
     if (gamesToDisplay.length === 0) {
-        list.innerHTML = '<li class="DodgerListItem">No games found for this month.</li>';
+        list.innerHTML = '<li class="DodgerListItem">No games found.</li>';
         return;
     }
 
@@ -45,17 +45,27 @@ function renderGames(gamesToDisplay) {
         const isHome = game.teams.home.team.id === 119;
         const opponent = isHome ? game.teams.away.team.name : game.teams.home.team.name;
         
-        const homeScore = game.teams.home.score !== undefined ? game.teams.home.score : "";
-        const awayScore = game.teams.away.score !== undefined ? game.teams.away.score : "";
-        let scoreDisplay = game.status.abstractGameState !== "Preview" ? 
-            (isHome ? `${homeScore} - ${awayScore}` : `${awayScore} - ${homeScore}`) : "TBD";
+        // Score Logic
+        let scoreDisplay = "TBD";
+        
+        if (game.status.abstractGameState !== "Preview") {
+            const homeScore = game.teams.home.score ?? 0;
+            const awayScore = game.teams.away.score ?? 0;
+
+            // Dodgers color: #005A9C | Opponent color: #EF3E42
+            const homeSpan = `<span style="color: ${isHome ? '#005A9C' : '#EF3E42'};">${homeScore}</span>`;
+            const awaySpan = `<span style="color: ${!isHome ? '#005A9C' : '#EF3E42'};">${awayScore}</span>`;
+            
+            // Format: Away - Home
+            scoreDisplay = `${awaySpan} - ${homeSpan}`;
+        }
 
         const li = document.createElement('li');
         li.className = "DodgerListItem list-group-item d-flex justify-content-between align-items-center";
         li.innerHTML = `
             <span style="flex: 1; font-weight: bold;">${gameDate}</span>
             <span style="flex: 2; text-align: left;">${isHome ? 'vs' : '@'} ${opponent}</span>
-            <span style="flex: 1; text-align: center; color: #005A9C; font-weight: bold;">${scoreDisplay}</span>
+            <span style="flex: 1; text-align: center; font-weight: bold;">${scoreDisplay}</span>
             <span style="flex: 1; text-align: center; font-size: 0.85em;">${gameTime}</span>
         `;
         list.appendChild(li);
@@ -65,7 +75,6 @@ function renderGames(gamesToDisplay) {
 // Listen for dropdown changes
 document.getElementById('month-filter').addEventListener('change', (e) => {
     const selectedMonth = e.target.value;
-    
     if (selectedMonth === "all") {
         renderGames(allGames);
     } else {
@@ -77,9 +86,5 @@ document.getElementById('month-filter').addEventListener('change', (e) => {
     }
 });
 
-
+// Initialize
 fetchDodgersSchedule();
-
-
-
-
