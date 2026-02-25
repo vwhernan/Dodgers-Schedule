@@ -28,8 +28,12 @@ body {
     text-align: center;
 }
 
-.myDate{
+.myDate {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+    font-size: 1.1rem; 
+    vertical-align: middle;
+    display: inline-block;
+    margin-left: 5px;
 }
 
 /*============== THE LIST  ================*/
@@ -113,6 +117,7 @@ body {
     margin-left: 1em;
     border: 1px solid #ffffff;
 }
+
 
 
 
