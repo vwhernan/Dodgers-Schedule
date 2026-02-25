@@ -28,6 +28,10 @@ body {
     text-align: center;
 }
 
+.myDate{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 /*============== THE LIST  ================*/
 .DodgersList {
     /* calc(100vh - 200px) ensures the list takes up most of the screen 
@@ -109,6 +113,7 @@ body {
     margin-left: 1em;
     border: 1px solid #ffffff;
 }
+
 
 
 
