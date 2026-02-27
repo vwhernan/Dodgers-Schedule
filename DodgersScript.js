@@ -76,6 +76,22 @@ function renderGames(gamesToDisplay) {
             promoDisplay = promotions.map(p => `${p.name || p.title}`).join(", ");
         }
 
+        // --- Month Filter Logic ---
+        document.getElementById('month-filter').addEventListener('change', function(e) {
+            const selectedMonth = e.target.value;
+        
+            if (selectedMonth === "all") {
+                renderGames(allGames);
+            } else {
+                const filteredGames = allGames.filter(game => {
+                    const gameDate = new Date(game.gameDate);
+                    // .getMonth() returns 0 for Jan, 1 for Feb, etc., matching your HTML values
+                    return gameDate.getMonth() === parseInt(selectedMonth);
+                });
+                renderGames(filteredGames);
+            }
+        });
+
       const li = document.createElement('li');
         li.className = "DodgerListItem list-group-item schedule-grid"; 
 
@@ -92,3 +108,4 @@ function renderGames(gamesToDisplay) {
 
 fetchDodgersSchedule();
 displayCurrentDate();
+
