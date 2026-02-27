@@ -41,28 +41,30 @@ function renderGames(gamesToDisplay) {
 
         const isHome = game.teams.home.team.id === 119;
         const opponent = isHome ? game.teams.away.team.name : game.teams.home.team.name;
-        
-        // This is the color for the "Game" column text
-        const gameTextColor = isHome ? '#2b82c0' : '#000000';
 
+        // 1. Create the specific blue label for 'Home'
+        const locationLabel = isHome 
+            ? `<span style="color: #2b82c0;">Home</span> vs` 
+            : `Away @`;
+
+        // 2. Re-added the missing score logic
         let scoreDisplay = "TBD";
         if (game.status.abstractGameState !== "Preview") {
             const homeScore = game.teams.home.score ?? 0;
             const awayScore = game.teams.away.score ?? 0;
 
-            // Score numbers still follow team colors
             const homeSpan = `<span style="color: ${isHome ? '#005A9C' : '#EF3E42'};">${homeScore}</span>`;
             const awaySpan = `<span style="color: ${!isHome ? '#005A9C' : '#EF3E42'};">${awayScore}</span>`;
             
-            // Home score always first
             scoreDisplay = `${homeSpan} - ${awaySpan}`;
         }
 
+        // 3. Render the HTML
         const li = document.createElement('li');
         li.className = "DodgerListItem list-group-item d-flex justify-content-between align-items-center";
         li.innerHTML = `
             <span style="flex: 1; font-weight: bold;">${gameDate}</span>
-            <span style="flex: 2; text-align: left; color: ${gameTextColor}; font-weight: bold;">${isHome ? 'Home vs' : 'Away @'} ${opponent}</span>
+            <span style="flex: 2; text-align: left; font-weight: bold;">${locationLabel} ${opponent}</span>
             <span style="flex: 1; text-align: center; font-weight: bold;">${scoreDisplay}</span>
             <span style="flex: 1; text-align: center; font-size: 0.85em;">${gameTime}</span>
         `;
