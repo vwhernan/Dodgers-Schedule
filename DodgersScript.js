@@ -5,7 +5,6 @@ async function fetchDodgersSchedule() {
     const startDate = `${currentYear}-01-01`;
     const endDate = `${currentYear}-12-31`;
     
-    // Use the comprehensive hydration string
     const url = `https://statsapi.mlb.com/api/v1/schedule?sportId=1&teamId=119&startDate=${startDate}&endDate=${endDate}&gameType=S,R,P&hydrate=game(promotions),linescore`;
 
     try {
@@ -39,6 +38,12 @@ function renderGames(gamesToDisplay) {
 
     const gameTypes = { 'S': 'Spring', 'R': 'Regular', 'P': 'Postseason' };
 
+    // Add a check for empty results
+    if (gamesToDisplay.length === 0) {
+        list.innerHTML = '<li class="list-group-item text-center">No games found for this month.</li>';
+        return;
+    }
+
     gamesToDisplay.forEach(game => {
         const gameDateObj = new Date(game.gameDate);
         const gameDate = gameDateObj.toLocaleDateString([], { month: 'short', day: 'numeric' });
@@ -48,12 +53,8 @@ function renderGames(gamesToDisplay) {
         const opponent = isHome ? game.teams.away.team.name : game.teams.home.team.name;
         const typeLabel = gameTypes[game.gameType] || game.gameType;
 
-        // --- Home Blue Logic ---
-        const locationLabel = isHome 
-            ? `<span style="color: #2b82c0;">Home</span> vs` 
-            : `Away @`;
+        const locationLabel = isHome ? `<span style="color: #2b82c0;">Home</span> vs` : `Away @`;
 
-        // --- Score Logic ---
         let scoreDisplay = "TBD";
         if (game.status.abstractGameState !== "Preview") {
             const homeScore = game.teams.home.score ?? 0;
@@ -63,38 +64,14 @@ function renderGames(gamesToDisplay) {
             scoreDisplay = `${homeSpan} - ${awaySpan}`;
         }
 
-        // --- Promotions Logic ---
         let promoDisplay = `<span>None</span>`;
-
-        // Check if promotions exist in the game object or team-specific objects
-        const promotions = game.promotions || 
-                   (game.teams.home.promotions) || 
-                   (game.teams.away.promotions);
-
+        const promotions = game.promotions || (game.teams.home.promotions) || (game.teams.away.promotions);
         if (promotions && promotions.length > 0) {
-            // Map through the array. Note: API usually uses 'name' or 'title'
             promoDisplay = promotions.map(p => `${p.name || p.title}`).join(", ");
         }
 
-        // --- Month Filter Logic ---
-        document.getElementById('month-filter').addEventListener('change', function(e) {
-            const selectedMonth = e.target.value;
-        
-            if (selectedMonth === "all") {
-                renderGames(allGames);
-            } else {
-                const filteredGames = allGames.filter(game => {
-                    const gameDate = new Date(game.gameDate);
-                    // .getMonth() returns 0 for Jan, 1 for Feb, etc., matching your HTML values
-                    return gameDate.getMonth() === parseInt(selectedMonth);
-                });
-                renderGames(filteredGames);
-            }
-        });
-
-      const li = document.createElement('li');
+        const li = document.createElement('li');
         li.className = "DodgerListItem list-group-item schedule-grid"; 
-
         li.innerHTML = `
             <span class="col-date" style="font-weight: bold;">${gameDate}</span>
             <span class="col-game" style="font-weight: bold;">${locationLabel} ${opponent} <small style="font-weight: normal; color: #888;"><br>(${typeLabel})</small></span>
@@ -106,6 +83,21 @@ function renderGames(gamesToDisplay) {
     });
 }
 
+
+document.getElementById('month-filter').addEventListener('change', function(e) {
+    const selectedMonth = e.target.value;
+
+    if (selectedMonth === "all") {
+        renderGames(allGames);
+    } else {
+        const filteredGames = allGames.filter(game => {
+            const gameDate = new Date(game.gameDate);
+            return gameDate.getMonth() === parseInt(selectedMonth);
+        });
+        renderGames(filteredGames);
+    }
+});
+
+// Initialize
 fetchDodgersSchedule();
 displayCurrentDate();
-
