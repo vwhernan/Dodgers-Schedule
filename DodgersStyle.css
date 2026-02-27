@@ -1,151 +1,87 @@
 body {
     margin: 0;
     padding: 0;
-    overflow-x: hidden; /* Prevent horizontal scrolling on mobile */
+    overflow-x: hidden;
 }
 
-/*==============DODGER CSS================*/
-.DodgersFont-Border {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-    width: 100%;           /* Fill the column width */
-    max-width: 600px;      /* don't get too big on Desktop */
-    margin: 0 auto;        /* Center it */
+#dodgers-schedule {
+    max-width: 800px;
+    margin: 0 auto;
     border: 1px solid #444;
-    border-radius: 8px;    /* Rounded corners*/
-    overflow: hidden;      /* Keeps the list from breaking the rounded corners */
+    border-radius: 8px;
+    overflow: hidden;
 }
 
-/*============== HEADER ================*/
+/* Header Styling */
 .DodgersHeader {
-    background: #005A9C; 
-    display: flex;
-    align-items: center;     
-    justify-content: center; 
-    padding: 10px; 
- 
+    background-color: #005A9C;
+    padding: 15px;
+    color: white;
 }
 
 .DodgersHeader p {
-    font-family: 'Playball', cursive !important; 
-    color: white; 
-    font-weight: 400; 
-    font-size: 1.8rem; 
-    text-transform: none; /* REQUIRED: Script fonts break if they are all caps */
-    letter-spacing: 1px; 
-    text-align: center;
-    margin-bottom: 0;
-}
-.myDate {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
-    font-size: 1.7rem; 
-    margin-left: 10px;
-    margin-bottom: 4px;      
-    line-height: 1;
+    font-family: 'Playball', cursive !important;
+    font-size: 2rem;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 15px;
 }
 
-/*============== THE LIST  ================*/
+.myDate {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* The List Container */
 .DodgersList {
-    /* calc(100vh - 200px) ensures the list takes up most of the screen 
-       minus the space for the header and nav */
-    height: 70vh; 
+    height: 65vh;
     overflow-y: auto;
-    list-style: none;
-    padding: 0;
-    margin: 0;
     background-color: #A5ACAF;
 }
 
-/* Mobile Friendly Scrollbar */
-.DodgersList::-webkit-scrollbar {
-    width: 4px;
-}
-.DodgersList::-webkit-scrollbar-thumb {
-    background: #005A9C;
-    border-radius: 10px;
-}
-
-/*============== LIST ITEMS ================*/
-#game-list .DodgerListItem {
-    padding: 18px 15px !important; /* Larger touch targets for fingers */
-    background-color: #ffffff !important; /* Clean white background */
-    color: #333 !important;
-    font-size: 1rem;
-    border-bottom: 1px solid #eee !important;
-    display: flex;
+/* Flex Grid for Rows */
+.ListHeaderli, .DodgerListItem {
+    display: flex !important;
     align-items: center;
-}
-
-/* Filter Dropdown Styling */
-.DodgersSearch {
-    background-color: #f8f9fa;
-    color: #333;
-    font-weight: bold;
-    border: none;
-    padding: 10px;
-}
-
-
-
-[data-bs-theme="dark"] .ListHeaderUl .ListHeaderli {
-    background-color: #005A9C !important;
-    --bs-list-group-bg: #005A9C !important;
-    color: white !important;
-    --bs-list-group-color: white !important;
-    border-color: #004a80 !important;
-    font-weight: bold;
-}
-.ListHeaderUl{
-    list-style-type: none;
-    padding: 0;
-    margin-bottom: 2px;
-    
-}
-
-.ListHeaderli {
-    /* Target the specific Bootstrap variables */
-    --bs-list-group-bg: #005A9C !important;
-    --bs-list-group-color: #ffffff !important;
-    --bs-list-group-border-color: #004a80 !important;
-    
-    /* Fallback for older browsers or specific overrides */
-    background-color: #005A9C !important; 
-    color: white !important;
-    font-weight: bold;
+    padding: 12px 10px !important;
     border-radius: 0 !important;
 }
 
-.ListHeaderli span {
-    flex: 1;          /* Each span takes up equal space */
-    text-align: center; /* Centers the text within that space */
+/* Column Widths - Adjust these to balance the look */
+.col-date  { flex: 0 0 15%; min-width: 60px; font-weight: bold; }
+.col-game  { flex: 1 1 30%; min-width: 140px; font-weight: bold; }
+.col-score { flex: 0 0 15%; min-width: 70px; text-align: center; }
+.col-time  { flex: 0 0 15%; min-width: 80px; text-align: center; }
+.col-promo { flex: 1 1 25%; font-size: 0.85rem; padding-left: 10px; }
+
+/* Mobile optimization: Hide promo on very small screens if it gets too crowded */
+@media (max-width: 576px) {
+    .col-promo { display: none; }
+    .col-game { flex: 1 1 50%; }
 }
-/*==============Widget Two CSS================*/
 
-.widgetTwo{
-    margin-top: 1em;
-    margin-left: 1em;
-    border: 1px solid #ffffff;
+/* Header specific */
+.ListHeaderli {
+    background-color: #005A9C !important;
+    color: white !important;
+    border-bottom: 2px solid #004a80;
 }
 
+/* Item specific */
+#game-list .DodgerListItem {
+    background-color: #ffffff !important;
+    color: #333 !important;
+    border-bottom: 1px solid #eee !important;
+}
 
+#game-list .DodgerListItem:nth-child(even) {
+    background-color: #f9f9f9 !important;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.widgetTwo {
+    min-width: 250px;
+    border: 1px solid #555;
+}
