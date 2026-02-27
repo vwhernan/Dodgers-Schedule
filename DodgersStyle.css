@@ -53,9 +53,9 @@ body {
 /* Column Widths - Adjust these to balance the look */
 .col-date  { flex: 0 0 15%; min-width: 60px; font-weight: bold; }
 .col-game  { flex: 1 1 30%; min-width: 140px; font-weight: bold; }
-.col-score { flex: 0 0 15%; min-width: 70px; text-align: center; }
-.col-time  { flex: 0 0 15%; min-width: 80px; text-align: center; }
-.col-promo { flex: 1 1 25%; font-size: 0.85rem; padding-left: 10px; }
+.col-score { flex: 0 0 15%; min-width: 70px; text-align: center; font-weight: bold; }
+.col-time  { flex: 0 0 15%; min-width: 80px; text-align: center; font-weight: bold;  }
+.col-promo { flex: 1 1 25%; font-size: 0.85rem; font-weight: bold;  padding-left: 10px; }
 
 /* Mobile optimization: Hide promo on very small screens if it gets too crowded */
 @media (max-width: 576px) {
@@ -85,4 +85,5 @@ body {
     min-width: 250px;
     border: 1px solid #555;
 }
+
 
