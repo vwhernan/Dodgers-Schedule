@@ -2,6 +2,7 @@ body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+    background-image: url('DodgerStadium.png') !important; /* Ensure this path is correct */
 }
 
 #dodgers-schedule {
@@ -85,5 +86,6 @@ body {
     min-width: 250px;
     border: 1px solid #555;
 }
+
 
 
