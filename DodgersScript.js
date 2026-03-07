@@ -166,7 +166,7 @@ function calculateAndDisplayRecord(games) {
 
     const recordElement = document.getElementById('dodgers-record');
     if (recordElement) {
-        recordElement.textContent = `(${wins} - ${losses})`;
+        recordElement.innerHTML = `&nbsp;&nbsp; W - ${wins} &nbsp;&nbsp; L - ${losses}`;
     }
 }
 
