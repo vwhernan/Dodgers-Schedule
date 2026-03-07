@@ -68,8 +68,16 @@ body::before {
     display: flex !important;
     align-items: center;
     padding: 12px 10px !important;
-    border-radius: 0 !important;
+    border: none !important;
 }
+
+.ListHeaderliCurr {
+    display: flex !important;
+    align-items: center;
+    padding: 12px 10px !important;
+    border: solid 1pt #444 !important;
+}
+
 
 /* Column Widths - Adjust these to balance the look */
 .col-date  { flex: 0 0 15%; min-width: 60px; font-weight: bold; }
@@ -85,16 +93,30 @@ body::before {
 }
 
 /* Header specific */
+.ListHeaderUl, .list-group {
+    border: none !important;
+}
+
 .ListHeaderli {
     background-color: #005A9C !important;
     color: white !important;
-    border-bottom: 2px solid #004a80;
+   
 }
+
+.ListHeaderliCurr {
+    font-size: 12pt;
+    background-color: #6cb7ff !important;
+    color: rgb(255, 255, 255) !important;
+
+    letter-spacing: 1pt; 
+}
+
 
 /* Item specific */
 #game-list .DodgerListItem {
     background-color: #ffffff !important;
     color: #333 !important;
+   
     border-bottom: 1px solid #eee !important;
 }
 
