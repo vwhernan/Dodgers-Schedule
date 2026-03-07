@@ -97,6 +97,7 @@ body::before {
     font-weight: bold; 
     white-space: nowrap; 
 }
+}
 
 /* Header specific */
 .ListHeaderUl, .list-group {
@@ -134,8 +135,3 @@ body::before {
     min-width: 250px;
     border: 1px solid #555;
 }
-
-
-
-
-
