@@ -17,6 +17,9 @@ async function fetchDodgersSchedule() {
             });
         }
 
+        // Calculate the record based on all games fetched
+        calculateAndDisplayRecord(allGames);
+
         // Set the featured header game
         const featured = getNextGame(allGames);
         renderFeaturedGame(featured);
@@ -139,6 +142,36 @@ document.getElementById('month-filter').addEventListener('change', function(e) {
     }
 });
 
+function calculateAndDisplayRecord(games) {
+    let wins = 0;
+    let losses = 0;
+    const dodgersId = 119;
+
+    games.forEach(game => {
+        // Only count games that are finished
+        if (game.status.abstractGameState === "Final") {
+            const homeScore = game.teams.home.score;
+            const awayScore = game.teams.away.score;
+            const isHome = game.teams.home.team.id === dodgersId;
+
+            if (isHome) {
+                if (homeScore > awayScore) wins++;
+                else if (homeScore < awayScore) losses++;
+            } else {
+                if (awayScore > homeScore) wins++;
+                else if (awayScore < homeScore) losses++;
+            }
+        }
+    });
+
+    const recordElement = document.getElementById('dodgers-record');
+    if (recordElement) {
+        recordElement.textContent = `(${wins} - ${losses})`;
+    }
+}
+
 // Initialize
 fetchDodgersSchedule();
-displayCurrentDate();
+calculateAndDisplayRecord(games)
+
+//displayCurrentDate();
