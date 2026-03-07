@@ -4,7 +4,6 @@ async function fetchDodgersSchedule() {
     const currentYear = new Date().getFullYear();
     const startDate = `${currentYear}-01-01`;
     const endDate = `${currentYear}-12-31`;
-    
     const url = `https://statsapi.mlb.com/api/v1/schedule?sportId=1&teamId=119&startDate=${startDate}&endDate=${endDate}&gameType=S,R,P&hydrate=game(promotions),linescore`;
 
     try {
@@ -17,10 +16,26 @@ async function fetchDodgersSchedule() {
                 date.games.forEach(game => allGames.push(game));
             });
         }
+
+        // Set the featured header game
+        const featured = getNextGame(allGames);
+        renderFeaturedGame(featured);
+
+        // Render the full scrollable list
         renderGames(allGames); 
+        
     } catch (error) {
-        console.error("Error:", error);
+        console.error("Error fetching schedule:", error);
     }
+}
+
+function getNextGame(games) {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Start of today
+
+    // Find the first game that is today or later
+    const next = games.find(game => new Date(game.gameDate) >= today);
+    return next || games[games.length - 1]; // Return last game if season over
 }
 
 function displayCurrentDate() {
@@ -30,6 +45,32 @@ function displayCurrentDate() {
         const today = new Date().toLocaleDateString('en-US', options);
         dateElement.textContent = today;
     }
+}
+
+
+function renderFeaturedGame(game) {
+    if (!game) return;
+
+    const gameDateObj = new Date(game.gameDate);
+    const isHome = game.teams.home.team.id === 119;
+    const opponent = isHome ? game.teams.away.team.name : game.teams.home.team.name;
+    
+    document.getElementById('curr-date').textContent = gameDateObj.toLocaleDateString([], { month: 'short', day: 'numeric' });
+    document.getElementById('curr-game').innerHTML = `<strong>${isHome ? 'Home vs' : 'Away @'}</strong> ${opponent}`;
+    document.getElementById('curr-time').textContent = gameDateObj.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+
+     let scoreDisplay = "TBD";
+        if (game.status.abstractGameState !== "Preview") {
+            const homeScore = game.teams.home.score ?? 0;
+            const awayScore = game.teams.away.score ?? 0;
+            const homeSpan = `<span style="color: ${isHome ? '#005A9C' : '#EF3E42'};">${homeScore}</span>`;
+            const awaySpan = `<span style="color: ${!isHome ? '#005A9C' : '#EF3E42'};">${awayScore}</span>`;
+            scoreDisplay = `${homeSpan} - ${awaySpan}`;
+        }
+    document.getElementById('curr-score').textContent = scoreDisplay;
+
+    const promotions = game.promotions || (game.teams.home.promotions) || [];
+    document.getElementById('curr-promo').textContent = promotions.length > 0 ? promotions[0].name : "None";
 }
 
 function renderGames(gamesToDisplay) {
