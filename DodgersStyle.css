@@ -91,12 +91,13 @@ body::before {
     .col-promo { display: none; }
     .col-game { flex: 1 1 50%; }
     .col-score { 
-    flex: 0 0 15%; 
-    min-width: 70px; 
-    text-align: center; 
-    font-weight: bold; 
-    white-space: nowrap; 
-}
+        font-size: 10pt;
+        flex: 0 0 15%; 
+        min-width: 70px; 
+        text-align: center; 
+        font-weight: bold; 
+        white-space: nowrap; 
+    }
 }
 
 /* Header specific */
@@ -135,3 +136,4 @@ body::before {
     min-width: 250px;
     border: 1px solid #555;
 }
+
