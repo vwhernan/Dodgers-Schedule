@@ -98,14 +98,37 @@ function renderGames(gamesToDisplay) {
         const typeLabel = gameTypes[game.gameType] || game.gameType;
 
         const locationLabel = isHome ? `<span style="color: #2b82c0;">Home</span> vs` : `Away @`;
+        let resultLabel = ""; // New variable for W/L status
 
         let scoreDisplay = "TBD";
         if (game.status.abstractGameState !== "Preview") {
             const homeScore = game.teams.home.score ?? 0;
             const awayScore = game.teams.away.score ?? 0;
+
+            // Determine if Dodgers won
+            const dodgersScore = isHome ? homeScore : awayScore;
+            const opponentScore = isHome ? awayScore : homeScore;
+
+            if (game.status.abstractGameState === "Final") {
+                if (dodgersScore > opponentScore) {
+                    resultLabel = `<span style="font-weight: bold; color: #000000;">W</span>`;
+                } else if (dodgersScore < opponentScore) {
+                    resultLabel = `<span style="font-weight: bold; color: #000000;">L</span>`;
+                } else {
+                    resultLabel = `<span style="font-weight: bold; color: #000000;">TBD</span>`;
+            }
+    }
+
             const homeSpan = `<span style="color: ${isHome ? '#005A9C' : '#EF3E42'};">${homeScore}</span>`;
             const awaySpan = `<span style="color: ${!isHome ? '#005A9C' : '#EF3E42'};">${awayScore}</span>`;
-            scoreDisplay = `${homeSpan} - ${awaySpan}`;
+            if(homeScore > awayScore){
+            scoreDisplay = ` ${resultLabel} &nbsp; ${homeSpan} - ${awaySpan} `;
+            }
+            else
+            {
+            scoreDisplay = ` ${resultLabel} &nbsp; ${awaySpan} - ${homeSpan} `;
+            }
+
         }
 
         let promoDisplay = `<span>None</span>`;
