@@ -195,6 +195,6 @@ function calculateAndDisplayRecord(games) {
 
 // Initialize
 fetchDodgersSchedule();
-calculateAndDisplayRecord(games)
 
 //displayCurrentDate();
+
