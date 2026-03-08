@@ -3,7 +3,10 @@ const ASSETS = [
   './',
   './index.html',
   './manifest.json',
-  './hello.png' // Add your CSS or JS filenames here too
+  './hello.png',
+  './DodgersStyle.css',
+  './DodgersScript.js',
+  './DodgerStadium.png'
 ];
 
 // Install the service worker
