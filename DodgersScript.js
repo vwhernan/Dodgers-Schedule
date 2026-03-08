@@ -70,7 +70,7 @@ function renderFeaturedGame(game) {
             const awaySpan = `<span style="color: ${!isHome ? '#005A9C' : '#EF3E42'};">${awayScore}</span>`;
             scoreDisplay = `${homeSpan} - ${awaySpan}`;
         }
-    document.getElementById('curr-score').textContent = scoreDisplay;
+    document.getElementById('curr-score').innerHTML = scoreDisplay;
 
     const promotions = game.promotions || (game.teams.home.promotions) || [];
     document.getElementById('curr-promo').textContent = promotions.length > 0 ? promotions[0].name : "None";
@@ -198,5 +198,6 @@ fetchDodgersSchedule();
 calculateAndDisplayRecord(allGames);
 
 //displayCurrentDate();
+
 
 
