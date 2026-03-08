@@ -1,4 +1,4 @@
-const CACHE_NAME = 'dodgers-v1';
+const CACHE_NAME = 'dodgers-v2';
 const ASSETS = [
   './',
   './index.html',
