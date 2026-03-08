@@ -90,16 +90,16 @@ body::before {
 @media (max-width: 576px) {
     .col-promo { display: none; }
     .col-game { flex: 1 1 50%; }
-    .dodgers-record { 
-        font-size: 1 rem;
-        font-weight: bold; 
+    .DodgersHeader p {
+        font-size: 1.5rem; 
+        gap: 8px;         
+        flex-wrap: nowrap; 
+    }
+
+    .dodgers-record {
+        font-size: 1rem;  
         white-space: nowrap; 
     }
-}
-
-/* Header specific */
-.ListHeaderUl, .list-group {
-    border: none !important;
 }
 
 .ListHeaderli {
@@ -133,5 +133,6 @@ body::before {
     min-width: 250px;
     border: 1px solid #555;
 }
+
 
 
