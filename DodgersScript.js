@@ -62,14 +62,23 @@ function renderFeaturedGame(game) {
     document.getElementById('curr-game').innerHTML = `<strong>${isHome ? 'Home vs' : 'Away @'}</strong> ${opponent}`;
     document.getElementById('curr-time').textContent = gameDateObj.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
 
-     let scoreDisplay = "TBD";
-        if (game.status.abstractGameState !== "Preview") {
-            const homeScore = game.teams.home.score ?? 0;
-            const awayScore = game.teams.away.score ?? 0;
-            const homeSpan = `<span style="color: ${isHome ? '#005A9C' : '#EF3E42'};">${homeScore}</span>`;
-            const awaySpan = `<span style="color: ${!isHome ? '#005A9C' : '#EF3E42'};">${awayScore}</span>`;
-            scoreDisplay = `${homeSpan} - ${awaySpan}`;
-        }
+    let scoreDisplay = "--"; // Default for upcoming games
+    
+    // Check if the game has actually started or finished
+    const state = game.status.abstractGameState;
+    if (state === "Live" || state === "Final") {
+        const homeScore = game.teams.home.score ?? 0;
+        const awayScore = game.teams.away.score ?? 0;
+        
+        const homeSpan = `<span style="color: ${isHome ? '#005A9C' : '#EF3E42'};">${homeScore}</span>`;
+        const awaySpan = `<span style="color: ${!isHome ? '#005A9C' : '#EF3E42'};">${awayScore}</span>`;
+        
+        scoreDisplay = `${homeSpan} - ${awaySpan}`;
+    } else {
+        scoreDisplay = "TBD";
+    }
+
+    // Use .innerHTML so the <span> tags are rendered correctly
     document.getElementById('curr-score').innerHTML = scoreDisplay;
 
     const promotions = game.promotions || (game.teams.home.promotions) || [];
@@ -198,6 +207,7 @@ fetchDodgersSchedule();
 calculateAndDisplayRecord(allGames);
 
 //displayCurrentDate();
+
 
 
 
