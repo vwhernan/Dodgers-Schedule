@@ -69,11 +69,16 @@ function displayCurrentDate() {
 
  //Populates the large "Featured Game" section (usually at the top)
 function renderFeaturedGame(game) {
+    // If there is no Game Then dont update the current game in the header (mainly for when the season ends, and to let the game that occured that day remain until midnight)
     if (!game) return;
 
+    //Convert Game Date into correct format
     const gameDateObj = new Date(game.gameDate);
-    // Check if Dodgers (ID 119) are the home team to determine the opponent name
+    
+    // Check if Dodgers (ID 119) are the home team 
     const isHome = game.teams.home.team.id === 119;
+
+    / Determine the opponent name
     const opponent = isHome ? game.teams.away.team.name : game.teams.home.team.name;
     
     // Fill in the basic text fields for the featured game
@@ -105,9 +110,8 @@ function renderFeaturedGame(game) {
     document.getElementById('curr-promo').textContent = promotions.length > 0 ? promotions[0].name : "None";
 }
 
-/**
- * Builds the full scrollable list of games
- */
+
+//Builds the full scrollable list of games
 function renderGames(gamesToDisplay) {
     const list = document.getElementById('game-list');
     list.innerHTML = ''; // Clear existing list items
@@ -149,10 +153,11 @@ function renderGames(gamesToDisplay) {
                 }
             }
 
+        //Give the home team score a color (blue for dodgers red for away team)  This can be change to any color depending on the team, for example if the home team was Athletics then make home team color green)
             const homeSpan = `<span style="color: ${isHome ? '#005A9C' : '#EF3E42'};">${homeScore}</span>`;
             const awaySpan = `<span style="color: ${!isHome ? '#005A9C' : '#EF3E42'};">${awayScore}</span>`;
             
-            // Format the score so the higher number usually appears first (common in sports apps)
+        // Format the score so the higher number usually appears first (common in sports apps)
             if(homeScore > awayScore){
                 scoreDisplay = ` ${resultLabel} &nbsp; ${homeSpan} - ${awaySpan} `;
             } else {
