@@ -78,7 +78,7 @@ function renderFeaturedGame(game) {
     // Check if Dodgers (ID 119) are the home team 
     const isHome = game.teams.home.team.id === 119;
 
-    / Determine the opponent name
+    // Determine the opponent name
     const opponent = isHome ? game.teams.away.team.name : game.teams.home.team.name;
     
     // Fill in the basic text fields for the featured game
