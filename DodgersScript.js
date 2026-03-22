@@ -237,4 +237,7 @@ function calculateAndDisplayRecord(games) {
 }
 
 // --- Execution ---
-fetchDodgersSchedule(); // Start the app
+window.addEventListener('DOMContentLoaded', () => {
+    displayCurrentDate(); // Call this so the date actually shows up
+    fetchDodgersSchedule();
+});
