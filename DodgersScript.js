@@ -237,7 +237,28 @@ function calculateAndDisplayRecord(games) {
 }
 
 // --- Execution ---
-window.addEventListener('DOMContentLoaded', () => {
-    displayCurrentDate(); // Call this so the date actually shows up
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Initialize the Date display
+    displayCurrentDate();
+
+    // 2. Start the API fetch
     fetchDodgersSchedule();
+
+    // 3. Move the Month Filter listener here so it waits for the HTML to exist
+    const monthFilter = document.getElementById('month-filter');
+    
+    if (monthFilter) {
+        monthFilter.addEventListener('change', function(e) {
+            const selectedMonth = e.target.value;
+            if (selectedMonth === "all") {
+                renderGames(allGames);
+            } else {
+                const filteredGames = allGames.filter(game => {
+                    const gameDate = new Date(game.gameDate);
+                    return gameDate.getMonth() === parseInt(selectedMonth);
+                });
+                renderGames(filteredGames);
+            }
+        });
+    }
 });
