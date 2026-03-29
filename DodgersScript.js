@@ -207,8 +207,8 @@ document.getElementById('month-filter').addEventListener('change', function(e) {
 
 //Iterates through all games to calculate the total season record
 function calculateAndDisplayRecord(games) {
-    let wins = 0;
-    let losses = 0;
+    let wins = -22;
+    let losses = -9;
     const dodgersId = 119;
 
     games.forEach(game => {
