@@ -207,13 +207,13 @@ document.getElementById('month-filter').addEventListener('change', function(e) {
 
 //Iterates through all games to calculate the total season record
 function calculateAndDisplayRecord(games) {
-    let wins = -20;
-    let losses = -9;
+    let wins = 0;
+    let losses = 0;
     const dodgersId = 119;
 
     games.forEach(game => {
         // Only count games that are officially finished
-        if (game.status.abstractGameState === "Final") {
+        if (game.status.abstractGameState === "Final" && game.gameType == "R") {
             const homeScore = game.teams.home.score;
             const awayScore = game.teams.away.score;
             const isHome = game.teams.home.team.id === dodgersId;
