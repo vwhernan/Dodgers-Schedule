@@ -82,7 +82,7 @@ function renderFeaturedGame(game) {
     const opponent = isHome ? game.teams.away.team.name : game.teams.home.team.name;
     
     // Fill in the basic text fields for the featured game
-    document.getElementById('curr-date').textContent = gameDateObj.toLocaleDateString([], { month: 'short', day: 'numeric' });
+    document.getElementById('curr-date').textContent = gameDateObj.toLocaleDateString([], { month: 'short', day: 'numeric', weekday: 'short'});
     document.getElementById('curr-game').innerHTML = `<strong>${isHome ? 'Home vs' : 'Away @'}</strong> ${opponent}`;
     document.getElementById('curr-time').textContent = gameDateObj.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
 
@@ -125,7 +125,7 @@ function renderGames(gamesToDisplay) {
 
     gamesToDisplay.forEach(game => {
         const gameDateObj = new Date(game.gameDate);
-        const gameDate = gameDateObj.toLocaleDateString([], { month: 'short', day: 'numeric' });
+        const gameDate = gameDateObj.toLocaleDateString([], { month: 'short', day: 'numeric', weekday: 'short' });
         const gameTime = gameDateObj.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', hour12: true });
 
         const isHome = game.teams.home.team.id === 119;
