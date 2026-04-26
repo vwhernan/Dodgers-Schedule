@@ -80,7 +80,7 @@ body::before {
 
 
 /* Column Widths - Adjust these to balance the look */
-.col-date  { flex: 0 0 15%; min-width: 60px; font-weight: bold; }
+.col-date  { flex: 0 0 15%; min-width: 60px; font-weight: bold; white-space: pre-line; }
 .col-game  { flex: 1 1 30%; min-width: 140px; font-weight: bold; }
 .col-score { flex: 0 0 15%; min-width: 70px; text-align: center; font-weight: bold; }
 .col-time  { flex: 0 0 15%; min-width: 80px; text-align: center; font-weight: bold;  }
