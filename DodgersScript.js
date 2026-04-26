@@ -125,7 +125,9 @@ function renderGames(gamesToDisplay) {
 
     gamesToDisplay.forEach(game => {
         const gameDateObj = new Date(game.gameDate);
-        const gameDate = gameDateObj.toLocaleDateString([], { month: 'short', day: 'numeric', weekday: 'short' });
+        const weekday = gameDateObj.toLocaleDateString([], { weekday: 'short' });
+        const datePart = gameDateObj.toLocaleDateString([], { month: 'short', day: 'numeric' });
+        const gameDate = `${weekday}\n${datePart}`;
         const gameTime = gameDateObj.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', hour12: true });
 
         const isHome = game.teams.home.team.id === 119;
